@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Read(//c/Users/jesse/Downloads/**)",
+      "Bash(unzip -o \"Stocky_brawler_in_worn_leather_armor_red_bandana_h.zip\" -d \"brawler_preview\")",
+      "Bash(unzip -o \"Stocky_brawler_in_worn_leather_armor_red_bandana_h \\(1\\).zip\" -d \"brawler_animations\")",
+      "Bash(unzip -o \"Massive_stone_golem_warrior_thick_arms_rocky_armor.zip\" -d \"crusher_sprites\")",
+      "Bash(cp C:/Users/jesse/Downloads/crusher_sprites/animations/Fight_Stance_Idle-6f8a4031/east/* C:/development/fightgame/public/sprites/crusher/idle/east/)",
+      "Bash(cp C:/Users/jesse/Downloads/crusher_sprites/animations/Fight_Stance_Idle-6f8a4031/west/* C:/development/fightgame/public/sprites/crusher/idle/west/)",
+      "Bash(cp C:/Users/jesse/Downloads/crusher_sprites/animations/Running-2be586c2/east/* C:/development/fightgame/public/sprites/crusher/run/east/)",
+      "Bash(cp C:/Users/jesse/Downloads/crusher_sprites/animations/Running-2be586c2/west-3fc3e843/* C:/development/fightgame/public/sprites/crusher/run/west/)",
+      "Bash(cp C:/Users/jesse/Downloads/crusher_sprites/animations/Cross_Punch-3ec2a890/east/* C:/development/fightgame/public/sprites/crusher/attack/east/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "Bash(gh auth *)",
+      "Bash(git init *)",
+      "Bash(git branch *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

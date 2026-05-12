@@ -1,0 +1,68 @@
+import Phaser from 'phaser';
+
+const FIXED_DT_SEC = 1 / 60;
+
+export interface PendingProjectile {
+  x: number;
+  y: number;
+  vx: number;
+  w: number;
+  h: number;
+  damage: number;
+  angle: number;
+  baseKnockback: number;
+  knockbackScaling: number;
+  sourcePlayer: number;
+  color: number;
+}
+
+export class Projectile {
+  x: number;
+  y: number;
+  active: boolean = true;
+
+  readonly vx: number;
+  readonly damage: number;
+  readonly angle: number;
+  readonly baseKnockback: number;
+  readonly knockbackScaling: number;
+  readonly sourcePlayer: number;
+
+  private readonly w: number;
+  private readonly h: number;
+  private readonly graphic: Phaser.GameObjects.Rectangle;
+
+  constructor(scene: Phaser.Scene, data: PendingProjectile) {
+    this.x = data.x;
+    this.y = data.y;
+    this.vx = data.vx;
+    this.w = data.w;
+    this.h = data.h;
+    this.damage = data.damage;
+    this.angle = data.angle;
+    this.baseKnockback = data.baseKnockback;
+    this.knockbackScaling = data.knockbackScaling;
+    this.sourcePlayer = data.sourcePlayer;
+
+    this.graphic = scene.add.rectangle(data.x, data.y, data.w, data.h, data.color);
+    this.graphic.setDepth(3);
+  }
+
+  tick(): void {
+    this.x += this.vx * FIXED_DT_SEC;
+    this.graphic.setPosition(this.x, this.y);
+  }
+
+  getHitbox(): Phaser.Geom.Rectangle {
+    return new Phaser.Geom.Rectangle(
+      this.x - this.w / 2,
+      this.y - this.h / 2,
+      this.w,
+      this.h,
+    );
+  }
+
+  destroy(): void {
+    this.graphic.destroy();
+  }
+}
