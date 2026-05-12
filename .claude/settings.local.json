@@ -19,7 +19,10 @@
       "Bash(git init *)",
       "Bash(git branch *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(gh repo *)",
+      "Bash(unzip -o \"Electric_mage_in_blue_robes_crackling_lightning_ar.zip\" -d \"volt_sprites\")",
+      "Bash(git push *)"
     ]
   }
 }

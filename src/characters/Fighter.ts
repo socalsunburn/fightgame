@@ -489,6 +489,9 @@ export class Fighter {
       knockbackScaling: def.knockbackScaling,
       sourcePlayer: this.playerIndex,
       color: this.playerColor,
+      spriteKey: def.spriteKey,
+      spriteFrames: def.spriteFrames,
+      spriteFrameRate: def.spriteFrameRate,
     });
   }
 

@@ -23,6 +23,9 @@ export interface ProjectileDef {
   angle: number;
   baseKnockback: number;
   knockbackScaling: number;
+  spriteKey?: string;      // animation key prefix, e.g. 'volt-fireball'
+  spriteFrames?: number;
+  spriteFrameRate?: number;
 }
 
 export interface MoveData {
@@ -259,6 +262,14 @@ export const CHARACTERS: Record<string, CharacterData> = {
   volt: {
     name: 'Volt',
     color: 0x00ddcc,
+    spriteKey: 'volt',
+    spriteAnims: [
+      { name: 'idle',    frames: 8, frameRate: 8,  repeat: -1 },
+      { name: 'run',     frames: 6, frameRate: 12, repeat: -1 },
+      { name: 'attack',  frames: 6, frameRate: 10, repeat:  0 },
+      { name: 'jump',    frames: 9, frameRate: 10, repeat: -1 },
+      { name: 'hitstun', frames: 6, frameRate: 12, repeat:  0 },
+    ],
     width: 38,
     height: 56,
     walkSpeed: 200,
@@ -276,7 +287,7 @@ export const CHARACTERS: Record<string, CharacterData> = {
       special:   {
         totalFrames: 40,
         hitboxes: [],
-        projectile: { spawnFrame: 15, speed: 520, w: 22, h: 14, damage: 9, angle: 0, baseKnockback: 42, knockbackScaling: 0.88 },
+        projectile: { spawnFrame: 15, speed: 520, w: 22, h: 14, damage: 9, angle: 0, baseKnockback: 42, knockbackScaling: 0.88, spriteKey: 'volt-fireball', spriteFrames: 6, spriteFrameRate: 12 },
       },
     },
   },

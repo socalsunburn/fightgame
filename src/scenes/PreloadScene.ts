@@ -34,6 +34,20 @@ export class PreloadScene extends Phaser.Scene {
           }
         }
       }
+
+      // Load projectile sprites if defined
+      const projDef = data.moves.special.projectile;
+      if (projDef?.spriteKey && projDef.spriteFrames) {
+        for (const dir of ['east', 'west']) {
+          for (let i = 0; i < projDef.spriteFrames; i++) {
+            const frameNum = String(i).padStart(3, '0');
+            this.load.image(
+              `${projDef.spriteKey}-${dir}-${i}`,
+              `${base}/fireball/${dir}/frame_${frameNum}.png`,
+            );
+          }
+        }
+      }
     }
   }
 
@@ -57,6 +71,23 @@ export class PreloadScene extends Phaser.Scene {
             })),
             frameRate: anim.frameRate,
             repeat: anim.repeat,
+          });
+        }
+      }
+
+      // Register projectile animation if defined
+      const projDef = data.moves.special.projectile;
+      if (projDef?.spriteKey && projDef.spriteFrames) {
+        for (const dir of ['east', 'west']) {
+          const key = `${projDef.spriteKey}-${dir}`;
+          if (this.anims.exists(key)) continue;
+          this.anims.create({
+            key,
+            frames: Array.from({ length: projDef.spriteFrames }, (_, i) => ({
+              key: `${projDef.spriteKey}-${dir}-${i}`,
+            })),
+            frameRate: projDef.spriteFrameRate ?? 12,
+            repeat: -1,
           });
         }
       }
