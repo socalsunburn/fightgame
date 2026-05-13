@@ -351,6 +351,15 @@ export const CHARACTERS: Record<string, CharacterData> = {
   mirror: {
     name: 'Mirror',
     color: 0xffdd00,
+    spriteKey: 'mirror',
+    spriteAnims: [
+      { name: 'idle',    frames: 8, frameRate: 8,  repeat: -1 },
+      { name: 'run',     frames: 6, frameRate: 12, repeat: -1 },
+      { name: 'attack',  frames: 6, frameRate: 12, repeat:  0 },
+      { name: 'special', frames: 7, frameRate: 12, repeat:  0 },
+      { name: 'jump',    frames: 9, frameRate: 10, repeat: -1 },
+      { name: 'hitstun', frames: 6, frameRate: 12, repeat:  0 },
+    ],
     width: 36,
     height: 58,
     walkSpeed: 190,
