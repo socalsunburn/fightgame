@@ -41,7 +41,15 @@ export class MenuScene extends Phaser.Scene {
       strokeThickness: 3,
     }).setOrigin(0.5).setDepth(2);
 
-    this.add.text(width / 2, height - 8, 'Created by Peter Gentile  |  © 2026 Crash-n-Burn Games', {
+    this.add.text(width / 2, height - 20, 'Created by Peter Gentile  |  Crash-n-Burn', {
+      fontSize: '10px',
+      color: '#aaaaaa',
+      fontFamily: 'monospace',
+      stroke: '#000000',
+      strokeThickness: 2,
+    }).setOrigin(0.5, 1).setDepth(2);
+
+    this.add.text(width / 2, height - 6, 'Copyright 2026', {
       fontSize: '10px',
       color: '#aaaaaa',
       fontFamily: 'monospace',
