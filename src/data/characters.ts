@@ -266,7 +266,11 @@ export const CHARACTERS: Record<string, CharacterData> = {
       upTilt:    { totalFrames: 14, hitboxes: [{ x:  0, y:-48, w: 38, h: 36, activeStart: 3, activeEnd: 7,  damage: 7,  angle: 88, baseKnockback: 34, knockbackScaling: 0.85 }] },
       downTilt:  { totalFrames: 12, hitboxes: [{ x: 22, y: 18, w: 40, h: 18, activeStart: 2, activeEnd: 5,  damage: 4,  angle: 75, baseKnockback: 20, knockbackScaling: 0.6  }] },
       airAttack: { totalFrames: 18, hitboxes: [{ x: 34, y: -5, w: 48, h: 34, activeStart: 3, activeEnd: 8,  damage: 8,  angle: 35, baseKnockback: 38, knockbackScaling: 0.9  }] },
-      special:   { totalFrames: 30, hitboxes: [{ x: 20, y:  0, w: 60, h: 50, activeStart: 8, activeEnd: 16, damage: 16, angle: 50, baseKnockback: 55, knockbackScaling: 1.4  }] },
+      special: {
+        totalFrames: 38,
+        hitboxes: [],
+        projectile: { spawnFrame: 12, speed: 480, w: 22, h: 22, damage: 13, angle: 5, baseKnockback: 52, knockbackScaling: 1.2, spriteKey: 'phantom-fireball', spriteFrames: 6, spriteFrameRate: 12 },
+      },
     },
   },
 

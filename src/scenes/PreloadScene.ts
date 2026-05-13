@@ -26,24 +26,25 @@ export class PreloadScene extends Phaser.Scene {
 
     // Load sprites for every character that has a spriteKey
     for (const [charKey, data] of Object.entries(CHARACTERS)) {
-      if (!data.spriteKey || !data.spriteAnims) continue;
-      const base = `sprites/${data.spriteKey}`;
+      if (data.spriteKey && data.spriteAnims) {
+        const base = `sprites/${data.spriteKey}`;
 
-      this.load.image(`${charKey}-portrait`, `${base}/portrait.png`);
+        this.load.image(`${charKey}-portrait`, `${base}/portrait.png`);
 
-      for (const anim of data.spriteAnims) {
-        for (const dir of ['east', 'west']) {
-          for (let i = 0; i < anim.frames; i++) {
-            const frameNum = String(i).padStart(3, '0');
-            this.load.image(
-              `${charKey}-${anim.name}-${dir}-${i}`,
-              `${base}/${anim.name}/${dir}/frame_${frameNum}.png`,
-            );
+        for (const anim of data.spriteAnims) {
+          for (const dir of ['east', 'west']) {
+            for (let i = 0; i < anim.frames; i++) {
+              const frameNum = String(i).padStart(3, '0');
+              this.load.image(
+                `${charKey}-${anim.name}-${dir}-${i}`,
+                `${base}/${anim.name}/${dir}/frame_${frameNum}.png`,
+              );
+            }
           }
         }
       }
 
-      // Load projectile sprites if defined
+      // Load projectile sprites — works for any character, sprite or not
       const projDef = data.moves.special.projectile;
       if (projDef?.spriteKey && projDef.spriteFrames) {
         for (const dir of ['east', 'west']) {
@@ -51,7 +52,7 @@ export class PreloadScene extends Phaser.Scene {
             const frameNum = String(i).padStart(3, '0');
             this.load.image(
               `${projDef.spriteKey}-${dir}-${i}`,
-              `${base}/fireball/${dir}/frame_${frameNum}.png`,
+              `sprites/${charKey}/fireball/${dir}/frame_${frameNum}.png`,
             );
           }
         }
