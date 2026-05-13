@@ -1,16 +1,15 @@
 import Phaser from 'phaser';
+import { MusicManager } from '../audio/MusicManager';
 
 export class MenuScene extends Phaser.Scene {
   constructor() { super('MenuScene'); }
 
-  preload(): void {
-    this.load.image('menu-bg', 'sprites/menu-bg.png');
-  }
-
   create(): void {
     const { width, height } = this.scale;
 
-    // Background art — shows if the image loaded, otherwise stays black
+    MusicManager.play(this, 'music-menu');
+
+    // Background art
     if (this.textures.exists('menu-bg')) {
       this.add.image(width / 2, height / 2, 'menu-bg').setDisplaySize(width, height).setDepth(0);
     }

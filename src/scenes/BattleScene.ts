@@ -5,6 +5,7 @@ import { InputHandler, PlayerInput } from '../input/InputHandler';
 import { CHARACTERS } from '../data/characters';
 import { STAGES } from '../data/stages';
 import { SoundManager } from '../audio/SoundManager';
+import { MusicManager } from '../audio/MusicManager';
 
 const FIXED_DT   = 1000 / 60;
 const BLAST_ZONE = { left: -300, right: 1580, top: -400, bottom: 900 };
@@ -38,6 +39,8 @@ export class BattleScene extends Phaser.Scene {
     const platforms = stageData.platforms.map(
       p => new Phaser.Geom.Rectangle(p.x, p.y, p.w, p.h)
     );
+
+    MusicManager.play(this, 'music-battle');
 
     this.cameras.main.setBackgroundColor(stageData.backgroundColor);
 

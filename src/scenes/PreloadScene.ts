@@ -17,6 +17,15 @@ export class PreloadScene extends Phaser.Scene {
 
     this.load.on('progress', (v: number) => bar.setSize(300 * v, 12));
 
+    // Menu background (shared across menu, stage select, char select)
+    this.load.image('menu-bg', 'sprites/menu-bg.png');
+
+    // Music tracks — silently ignored if files are missing
+    this.load.on('loaderror', () => {}); // suppress missing-file errors
+    this.load.audio('music-menu',    'music/menu.mp3');
+    this.load.audio('music-battle',  'music/battle.mp3');
+    this.load.audio('music-victory', 'music/victory.mp3');
+
     // Load stage background images
     for (const stage of STAGES) {
       if (stage.backgroundImage) {

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { CHARACTERS, CharacterData } from '../data/characters';
+import { MusicManager } from '../audio/MusicManager';
 
 const PLAYER_COLORS     = [0x4488ff, 0xff4444];
 const PLAYER_COLORS_HEX = ['#4488ff', '#ff4444'];
@@ -31,7 +32,14 @@ export class CharacterSelectScene extends Phaser.Scene {
 
     const { width, height } = this.scale;
 
+    MusicManager.play(this, 'music-menu');
+
     this.cameras.main.setBackgroundColor('#0d0d1f');
+
+    if (this.textures.exists('menu-bg')) {
+      this.add.image(width / 2, height / 2, 'menu-bg').setDisplaySize(width, height).setDepth(-2);
+      this.add.rectangle(width / 2, height / 2, width, height, 0x000000, 0.72).setDepth(-1);
+    }
 
     this.add.text(width / 2, 44, 'SELECT YOUR FIGHTER', {
       fontSize: '28px', color: '#ffffff', fontFamily: 'monospace',

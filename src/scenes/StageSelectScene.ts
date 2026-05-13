@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { STAGES, StageData } from '../data/stages';
+import { MusicManager } from '../audio/MusicManager';
 
 const CARD_W    = 260;
 const CARD_H    = 200;
@@ -20,7 +21,14 @@ export class StageSelectScene extends Phaser.Scene {
     this.selected = 0;
     this.cards = [];
 
+    MusicManager.play(this, 'music-menu');
+
     this.cameras.main.setBackgroundColor('#0d0d1f');
+
+    if (this.textures.exists('menu-bg')) {
+      this.add.image(width / 2, height / 2, 'menu-bg').setDisplaySize(width, height).setDepth(-2);
+      this.add.rectangle(width / 2, height / 2, width, height, 0x000000, 0.70).setDepth(-1);
+    }
 
     this.add.text(width / 2, 44, 'SELECT STAGE', {
       fontSize: '28px', color: '#ffffff', fontFamily: 'monospace',

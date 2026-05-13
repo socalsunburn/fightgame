@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { MusicManager } from '../audio/MusicManager';
 
 export class ResultsScene extends Phaser.Scene {
   constructor() { super('ResultsScene'); }
@@ -7,6 +8,8 @@ export class ResultsScene extends Phaser.Scene {
     const { width, height } = this.scale;
     const colors = ['#4488ff', '#ff4444'];
     const names  = ['P1', 'P2'];
+
+    MusicManager.play(this, 'music-victory');
 
     this.cameras.main.setBackgroundColor('#0a0a1a');
 
