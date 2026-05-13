@@ -343,8 +343,8 @@ export const CHARACTERS: Record<string, CharacterData> = {
       upTilt:    { totalFrames: 28, hitboxes: [{ x:  0, y:-58, w: 54, h: 44, activeStart: 8,  activeEnd: 15, damage: 10, angle: 88, baseKnockback: 48, knockbackScaling: 0.85 }] },
       downTilt:  { totalFrames: 22, hitboxes: [{ x: 28, y: 22, w: 58, h: 24, activeStart: 6,  activeEnd: 11, damage: 6,  angle: 68, baseKnockback: 28, knockbackScaling: 0.6  }] },
       airAttack: { totalFrames: 30, hitboxes: [{ x: 42, y:  6, w: 58, h: 44, activeStart: 6,  activeEnd: 13, damage: 12, angle: 35, baseKnockback: 50, knockbackScaling: 0.9  }] },
-      // Grab: must be close, high base KB, low scaling — punishes regardless of damage %
-      special:   { totalFrames: 28, hitboxes: [{ x: 22, y:  0, w: 28, h: 62, activeStart: 10, activeEnd: 18, damage: 12, angle: 50, baseKnockback: 85, knockbackScaling: 0.2  }] },
+      // Overhead throw: close range, low damage, launches opponent straight up
+      special:   { totalFrames: 32, hitboxes: [{ x: 18, y:  0, w: 32, h: 64, activeStart: 10, activeEnd: 16, damage: 5,  angle: 88, baseKnockback: 95, knockbackScaling: 0.1  }] },
     },
   },
 
