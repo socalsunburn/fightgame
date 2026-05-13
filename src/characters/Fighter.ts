@@ -65,6 +65,7 @@ export class Fighter {
   private readonly playerColor: number;
   private graphics: Phaser.GameObjects.Graphics;
   private gameSprite: Phaser.GameObjects.Sprite | null = null;
+  private readonly playerLabel: Phaser.GameObjects.Text;
 
   private pendingProjectiles: PendingProjectile[] = [];
   pendingCounterHit: ActiveHitbox | null = null;
@@ -85,6 +86,16 @@ export class Fighter {
 
     this.graphics = scene.add.graphics();
     this.graphics.setDepth(1);
+
+    const labelColors = ['#4488ff', '#ff4444'];
+    this.playerLabel = scene.add.text(startX, startY, `P${playerIndex + 1}\n▼`, {
+      fontSize: '14px',
+      color: labelColors[playerIndex],
+      fontFamily: 'monospace',
+      align: 'center',
+      stroke: '#000000',
+      strokeThickness: 3,
+    }).setOrigin(0.5, 1.0).setDepth(20);
 
     if (data.spriteKey) {
       const firstFrame = `${data.spriteKey}-idle-east-0`;
@@ -501,6 +512,11 @@ export class Fighter {
     } else {
       this.drawSprite();
     }
+    // Player indicator floats above the character's head
+    const headTop = this.data.spriteKey
+      ? this.y - 50
+      : this.y - this.data.height / 2;
+    this.playerLabel.setPosition(this.x, headTop - 4);
   }
 
   private updateSpriteMode(): void {
@@ -710,5 +726,6 @@ export class Fighter {
   destroy(): void {
     this.graphics.destroy();
     this.gameSprite?.destroy();
+    this.playerLabel.destroy();
   }
 }

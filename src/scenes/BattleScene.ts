@@ -3,16 +3,10 @@ import { Fighter } from '../characters/Fighter';
 import { Projectile } from '../characters/Projectile';
 import { InputHandler, PlayerInput } from '../input/InputHandler';
 import { CHARACTERS } from '../data/characters';
+import { STAGES } from '../data/stages';
 
 const FIXED_DT   = 1000 / 60;
 const BLAST_ZONE = { left: -300, right: 1580, top: -400, bottom: 900 };
-
-const STAGE_PLATFORMS = [
-  new Phaser.Geom.Rectangle(100, 520, 1080, 24),
-  new Phaser.Geom.Rectangle(160, 380, 260, 16),
-  new Phaser.Geom.Rectangle(860, 380, 260, 16),
-  new Phaser.Geom.Rectangle(510, 280, 260, 16),
-];
 
 export class BattleScene extends Phaser.Scene {
   private fighters: Fighter[] = [];
@@ -21,6 +15,7 @@ export class BattleScene extends Phaser.Scene {
   private stockIcons: Phaser.GameObjects.Rectangle[][] = [];
   private damageTexts: Phaser.GameObjects.Text[] = [];
   private matchOver: boolean = false;
+  private currentPlatforms: Phaser.Geom.Rectangle[] = [];
 
   /** Current game frame — deterministic, increments once per simulation tick. */
   gameFrame: number = 0;
@@ -30,7 +25,7 @@ export class BattleScene extends Phaser.Scene {
 
   constructor() { super('BattleScene'); }
 
-  create(data?: { p1?: string; p2?: string }): void {
+  create(data?: { p1?: string; p2?: string; stageKey?: string }): void {
     const { width } = this.scale;
 
     this.fighters    = [];
@@ -38,16 +33,25 @@ export class BattleScene extends Phaser.Scene {
     this.stockIcons  = [];
     this.damageTexts = [];
 
-    this.cameras.main.setBackgroundColor('#1a1a2e');
+    const stageData = STAGES.find(s => s.key === (data?.stageKey ?? 'void')) ?? STAGES[0];
+    const platforms = stageData.platforms.map(
+      p => new Phaser.Geom.Rectangle(p.x, p.y, p.w, p.h)
+    );
 
-    for (const plat of STAGE_PLATFORMS) {
-      this.add.rectangle(plat.centerX, plat.centerY, plat.width, plat.height, 0x445566);
+    this.cameras.main.setBackgroundColor(stageData.backgroundColor);
+
+    if (stageData.backgroundImage && this.textures.exists(stageData.backgroundImage)) {
+      this.add.image(640, 360, stageData.backgroundImage).setDepth(-1);
+    }
+
+    for (const plat of platforms) {
+      this.add.rectangle(plat.centerX, plat.centerY, plat.width, plat.height, stageData.platformColor);
     }
 
     const keys  = Object.keys(CHARACTERS);
     const p1key = data?.p1 ?? keys[0];
     const p2key = data?.p2 ?? keys[1];
-    const mainFloor = STAGE_PLATFORMS[0].top;
+    const mainFloor = platforms[0].top;
     this.fighters = [
       new Fighter(this, 0, CHARACTERS[p1key], 340, mainFloor - CHARACTERS[p1key].height / 2),
       new Fighter(this, 1, CHARACTERS[p2key], 940, mainFloor - CHARACTERS[p2key].height / 2),
@@ -59,6 +63,7 @@ export class BattleScene extends Phaser.Scene {
     this.matchOver    = false;
 
     this.buildHUD(width);
+    this.currentPlatforms = platforms;
   }
 
   // ── Fixed-timestep loop ───────────────────────────────────────────────────────
@@ -99,7 +104,7 @@ export class BattleScene extends Phaser.Scene {
    */
   simulateTick(inputs: [PlayerInput, PlayerInput]): void {
     for (let i = 0; i < this.fighters.length; i++) {
-      this.fighters[i].tick(inputs[i], STAGE_PLATFORMS);
+      this.fighters[i].tick(inputs[i], this.currentPlatforms);
     }
 
     // Spawn any projectiles the fighters queued this tick

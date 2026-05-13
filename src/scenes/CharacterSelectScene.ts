@@ -10,6 +10,7 @@ export class CharacterSelectScene extends Phaser.Scene {
   private charKeys: string[] = [];
   private selections: [number, number] = [0, 0];
   private locked: [boolean, boolean] = [false, false];
+  private stageKey: string = 'void';
 
   private charRects: Phaser.GameObjects.Rectangle[] = [];
   private charPortraits: (Phaser.GameObjects.Image | null)[] = [];
@@ -17,7 +18,8 @@ export class CharacterSelectScene extends Phaser.Scene {
   private statTexts: Phaser.GameObjects.Text[] = [];
   private lockTexts: Phaser.GameObjects.Text[] = [];
 
-  create(): void {
+  create(data?: { stageKey?: string }): void {
+    this.stageKey      = data?.stageKey ?? 'void';
     this.charKeys      = Object.keys(CHARACTERS);
     this.selections    = [0, 1];
     this.locked        = [false, false];
@@ -95,7 +97,7 @@ export class CharacterSelectScene extends Phaser.Scene {
   }
 
   private handleKey(code: string): void {
-    if (code === 'Escape') { this.scene.start('MenuScene'); return; }
+    if (code === 'Escape') { this.scene.start('StageSelectScene'); return; }
 
     if (!this.locked[0]) {
       if (code === 'KeyA') { this.cycle(0, -1); return; }
@@ -125,6 +127,7 @@ export class CharacterSelectScene extends Phaser.Scene {
         this.scene.start('BattleScene', {
           p1: this.charKeys[this.selections[0]],
           p2: this.charKeys[this.selections[1]],
+          stageKey: this.stageKey,
         });
       });
     }

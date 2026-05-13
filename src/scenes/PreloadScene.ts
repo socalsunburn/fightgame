@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { CHARACTERS } from '../data/characters';
+import { STAGES } from '../data/stages';
 
 export class PreloadScene extends Phaser.Scene {
   constructor() { super('PreloadScene'); }
@@ -15,6 +16,13 @@ export class PreloadScene extends Phaser.Scene {
     }).setOrigin(0.5);
 
     this.load.on('progress', (v: number) => bar.setSize(300 * v, 12));
+
+    // Load stage background images
+    for (const stage of STAGES) {
+      if (stage.backgroundImage) {
+        this.load.image(stage.backgroundImage, `sprites/backgrounds/${stage.key}.png`);
+      }
+    }
 
     // Load sprites for every character that has a spriteKey
     for (const [charKey, data] of Object.entries(CHARACTERS)) {

@@ -38,7 +38,7 @@ export class MenuScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    this.input.keyboard!.once('keydown', () => this.scene.start('CharacterSelectScene'));
+    this.input.keyboard!.once('keydown', () => this.scene.start('StageSelectScene'));
 
     // Gamepad start
     this.time.addEvent({
@@ -47,7 +47,7 @@ export class MenuScene extends Phaser.Scene {
       callback: () => {
         for (const gp of navigator.getGamepads()) {
           if (gp && gp.buttons.some(b => b.pressed)) {
-            this.scene.start('CharacterSelectScene');
+            this.scene.start('StageSelectScene');
           }
         }
       },
