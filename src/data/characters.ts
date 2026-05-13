@@ -338,13 +338,14 @@ export const CHARACTERS: Record<string, CharacterData> = {
     fallSpeed: 700,
     fastFallSpeed: 1000,
     weight: 128,
+    specialDashSpeed: 480,
     moves: {
       jab:       { totalFrames: 26, hitboxes: [{ x: 36, y:  0, w: 44, h: 34, activeStart: 8,  activeEnd: 14, damage: 8,  angle: 45, baseKnockback: 40, knockbackScaling: 0.7  }] },
       upTilt:    { totalFrames: 28, hitboxes: [{ x:  0, y:-58, w: 54, h: 44, activeStart: 8,  activeEnd: 15, damage: 10, angle: 88, baseKnockback: 48, knockbackScaling: 0.85 }] },
       downTilt:  { totalFrames: 22, hitboxes: [{ x: 28, y: 22, w: 58, h: 24, activeStart: 6,  activeEnd: 11, damage: 6,  angle: 68, baseKnockback: 28, knockbackScaling: 0.6  }] },
       airAttack: { totalFrames: 30, hitboxes: [{ x: 42, y:  6, w: 58, h: 44, activeStart: 6,  activeEnd: 13, damage: 12, angle: 35, baseKnockback: 50, knockbackScaling: 0.9  }] },
-      // Overhead throw: close range, low damage, launches opponent straight up
-      special:   { totalFrames: 32, hitboxes: [{ x: 18, y:  0, w: 32, h: 64, activeStart: 10, activeEnd: 16, damage: 5,  angle: 88, baseKnockback: 95, knockbackScaling: 0.1  }] },
+      // Charge tackle: slow but hits like a truck
+      special:   { totalFrames: 38, hitboxes: [{ x: 44, y:  0, w: 62, h: 60, activeStart: 6,  activeEnd: 22, damage: 18, angle: 42, baseKnockback: 78, knockbackScaling: 1.3  }] },
     },
   },
 
