@@ -87,7 +87,7 @@ export class CharacterSelectScene extends Phaser.Scene {
       this.lockTexts.push(lockText);
     }
 
-    this.add.text(width / 2, height - 144, 'P1: WASD + F/G   |   P2: ARROWS + L/K   |   SHIELD: H / J   |   DOWN = fast fall', {
+    this.add.text(width / 2, height - 44, 'P1: WASD + F/G   |   P2: ARROWS + L/K   |   SHIELD: H / J   |   DOWN = fast fall', {
       fontSize: '16px', color: '#ffd700', fontFamily: 'monospace', fontStyle: 'bold',
       stroke: '#000000', strokeThickness: 3,
     }).setOrigin(0.5);
