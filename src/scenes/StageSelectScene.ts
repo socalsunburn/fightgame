@@ -21,7 +21,7 @@ export class StageSelectScene extends Phaser.Scene {
     this.selected = 0;
     this.cards = [];
 
-    MusicManager.play(this, 'music-menu');
+    MusicManager.play(this, 'music-lobby');
 
     this.cameras.main.setBackgroundColor('#0d0d1f');
 

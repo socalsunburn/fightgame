@@ -32,7 +32,7 @@ export class CharacterSelectScene extends Phaser.Scene {
 
     const { width, height } = this.scale;
 
-    MusicManager.play(this, 'music-menu');
+    MusicManager.play(this, 'music-lobby');
 
     this.cameras.main.setBackgroundColor('#0d0d1f');
 

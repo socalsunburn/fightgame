@@ -22,7 +22,8 @@ export class PreloadScene extends Phaser.Scene {
 
     // Music tracks — silently ignored if files are missing
     this.load.on('loaderror', () => {}); // suppress missing-file errors
-    this.load.audio('music-menu',    'music/menu.ogg');
+    this.load.audio('music-menu',  'music/menu.ogg');
+    this.load.audio('music-lobby', 'music/lobby.ogg');
     this.load.audio('music-battle1', 'music/battle1.ogg');
     this.load.audio('music-battle2', 'music/battle2.ogg');
     this.load.audio('music-battle3', 'music/battle3.ogg');
