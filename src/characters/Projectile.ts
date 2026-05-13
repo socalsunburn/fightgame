@@ -14,7 +14,8 @@ export interface PendingProjectile {
   knockbackScaling: number;
   sourcePlayer: number;
   color: number;
-  spriteKey?: string;    // if set, use animated sprite instead of rectangle
+  shape?: 'rect' | 'circle' | 'diamond';
+  spriteKey?: string;
   spriteFrames?: number;
   spriteFrameRate?: number;
 }
@@ -33,8 +34,7 @@ export class Projectile {
 
   private readonly w: number;
   private readonly h: number;
-  private readonly graphic: Phaser.GameObjects.Rectangle | null;
-  private readonly gameSprite: Phaser.GameObjects.Sprite | null;
+  private readonly visual: Phaser.GameObjects.Graphics | Phaser.GameObjects.Sprite;
 
   constructor(scene: Phaser.Scene, data: PendingProjectile) {
     this.x = data.x;
@@ -51,21 +51,42 @@ export class Projectile {
     if (data.spriteKey) {
       const dir = data.vx >= 0 ? 'east' : 'west';
       const animKey = `${data.spriteKey}-${dir}`;
-      this.gameSprite = scene.add.sprite(data.x, data.y, `${animKey}-0`);
-      this.gameSprite.setDepth(3);
-      this.gameSprite.play(animKey);
-      this.graphic = null;
+      const sprite = scene.add.sprite(data.x, data.y, `${animKey}-0`);
+      sprite.setDepth(3);
+      sprite.play(animKey);
+      this.visual = sprite;
     } else {
-      this.graphic = scene.add.rectangle(data.x, data.y, data.w, data.h, data.color);
-      this.graphic.setDepth(3);
-      this.gameSprite = null;
+      const g = scene.add.graphics();
+      g.setDepth(3);
+      this.drawShape(g, data.shape ?? 'rect', data.color, data.w, data.h);
+      g.setPosition(data.x, data.y);
+      this.visual = g;
+    }
+  }
+
+  private drawShape(
+    g: Phaser.GameObjects.Graphics,
+    shape: 'rect' | 'circle' | 'diamond',
+    color: number,
+    w: number,
+    h: number,
+  ): void {
+    g.fillStyle(color, 1);
+    if (shape === 'circle') {
+      g.fillCircle(0, 0, w / 2);
+    } else if (shape === 'diamond') {
+      const rx = w / 2;
+      const ry = h / 2;
+      g.fillTriangle(-rx, 0, 0, -ry, rx, 0);
+      g.fillTriangle(-rx, 0, 0,  ry, rx, 0);
+    } else {
+      g.fillRect(-w / 2, -h / 2, w, h);
     }
   }
 
   tick(): void {
     this.x += this.vx * FIXED_DT_SEC;
-    this.graphic?.setPosition(this.x, this.y);
-    this.gameSprite?.setPosition(this.x, this.y);
+    this.visual.setPosition(this.x, this.y);
   }
 
   getHitbox(): Phaser.Geom.Rectangle {
@@ -78,7 +99,6 @@ export class Projectile {
   }
 
   destroy(): void {
-    this.graphic?.destroy();
-    this.gameSprite?.destroy();
+    this.visual.destroy();
   }
 }

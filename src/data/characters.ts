@@ -23,7 +23,9 @@ export interface ProjectileDef {
   angle: number;
   baseKnockback: number;
   knockbackScaling: number;
-  spriteKey?: string;      // animation key prefix, e.g. 'volt-fireball'
+  color?: number;          // shape color (defaults to player color)
+  shape?: 'rect' | 'circle' | 'diamond';
+  spriteKey?: string;      // if set, use animated sprite instead of shape
   spriteFrames?: number;
   spriteFrameRate?: number;
 }
@@ -278,7 +280,7 @@ export const CHARACTERS: Record<string, CharacterData> = {
       special: {
         totalFrames: 38,
         hitboxes: [],
-        projectile: { spawnFrame: 12, speed: 480, w: 22, h: 22, damage: 13, angle: 5, baseKnockback: 52, knockbackScaling: 1.2, spriteKey: 'phantom-fireball', spriteFrames: 6, spriteFrameRate: 12 },
+        projectile: { spawnFrame: 12, speed: 480, w: 20, h: 20, damage: 13, angle: 5, baseKnockback: 52, knockbackScaling: 1.2, color: 0xaa44ff, shape: 'circle' },
       },
     },
   },
@@ -311,7 +313,7 @@ export const CHARACTERS: Record<string, CharacterData> = {
       special:   {
         totalFrames: 40,
         hitboxes: [],
-        projectile: { spawnFrame: 15, speed: 520, w: 22, h: 14, damage: 9, angle: 0, baseKnockback: 42, knockbackScaling: 0.88, spriteKey: 'volt-fireball', spriteFrames: 6, spriteFrameRate: 12 },
+        projectile: { spawnFrame: 15, speed: 520, w: 18, h: 18, damage: 9, angle: 0, baseKnockback: 42, knockbackScaling: 0.88, color: 0xffffff, shape: 'diamond' },
       },
     },
   },
