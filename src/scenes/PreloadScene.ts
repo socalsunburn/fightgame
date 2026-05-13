@@ -22,11 +22,11 @@ export class PreloadScene extends Phaser.Scene {
 
     // Music tracks — silently ignored if files are missing
     this.load.on('loaderror', () => {}); // suppress missing-file errors
-    this.load.audio('music-menu',    'music/menu.mp3');
-    this.load.audio('music-battle1', 'music/battle1.mp3');
-    this.load.audio('music-battle2', 'music/battle2.mp3');
-    this.load.audio('music-battle3', 'music/battle3.mp3');
-    this.load.audio('music-battle4', 'music/battle4.mp3');
+    this.load.audio('music-menu',    'music/menu.ogg');
+    this.load.audio('music-battle1', 'music/battle1.ogg');
+    this.load.audio('music-battle2', 'music/battle2.ogg');
+    this.load.audio('music-battle3', 'music/battle3.ogg');
+    this.load.audio('music-battle4', 'music/battle4.ogg');
 
     // Load stage background images
     for (const stage of STAGES) {
