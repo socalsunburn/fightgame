@@ -168,6 +168,7 @@ export const CHARACTERS: Record<string, CharacterData> = {
       { name: 'idle',    frames: 8, frameRate: 8,  repeat: -1 },
       { name: 'run',     frames: 6, frameRate: 14, repeat: -1 },
       { name: 'attack',  frames: 4, frameRate: 14, repeat:  0 },
+      { name: 'special', frames: 7, frameRate: 14, repeat:  0 },
       { name: 'jump',    frames: 7, frameRate: 10, repeat: -1 },
       { name: 'hitstun', frames: 6, frameRate: 12, repeat:  0 },
     ],
@@ -252,6 +253,14 @@ export const CHARACTERS: Record<string, CharacterData> = {
   phantom: {
     name: 'Phantom',
     color: 0xaa44ff,
+    spriteKey: 'phantom',
+    spriteAnims: [
+      { name: 'idle',    frames: 8, frameRate: 8,  repeat: -1 },
+      { name: 'run',     frames: 6, frameRate: 14, repeat: -1 },
+      { name: 'attack',  frames: 6, frameRate: 12, repeat:  0 },
+      { name: 'jump',    frames: 9, frameRate: 10, repeat: -1 },
+      { name: 'hitstun', frames: 6, frameRate: 12, repeat:  0 },
+    ],
     width: 32,
     height: 50,
     walkSpeed: 250,

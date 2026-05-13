@@ -557,8 +557,9 @@ export class Fighter {
       case FighterState.CHARGED_ATTACK:
       case FighterState.UP_TILT:
       case FighterState.DOWN_TILT:
-      case FighterState.AIR_ATTACK:
-      case FighterState.SPECIAL:            return 'attack';
+      case FighterState.AIR_ATTACK:         return 'attack';
+      case FighterState.SPECIAL:
+        return this.data.spriteAnims?.some(a => a.name === 'special') ? 'special' : 'attack';
       case FighterState.HITSTUN:            return 'hitstun';
       default:                              return 'idle';
     }
