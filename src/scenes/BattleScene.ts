@@ -40,7 +40,7 @@ export class BattleScene extends Phaser.Scene {
       p => new Phaser.Geom.Rectangle(p.x, p.y, p.w, p.h)
     );
 
-    MusicManager.play(this, 'music-battle');
+    MusicManager.play(this, stageData.musicKey);
 
     this.cameras.main.setBackgroundColor(stageData.backgroundColor);
 
@@ -289,6 +289,7 @@ export class BattleScene extends Phaser.Scene {
   }
 
   private endMatch(winnerIndex: number): void {
+    MusicManager.stop();
     this.scene.start('ResultsScene', { winner: winnerIndex });
   }
 }

@@ -80,6 +80,41 @@ export const SoundManager = {
     tone(520, 180, 'sawtooth', 0.10, 0.18);
   },
 
+  applause(): void {
+    const c = getCtx();
+    // Crowd noise — rapid overlapping noise bursts
+    for (let i = 0; i < 40; i++) {
+      const t      = c.currentTime + i * 0.07 + Math.random() * 0.04;
+      const frames = Math.ceil(c.sampleRate * 0.09);
+      const buf    = c.createBuffer(1, frames, c.sampleRate);
+      const data   = buf.getChannelData(0);
+      for (let j = 0; j < frames; j++) data[j] = Math.random() * 2 - 1;
+      const src  = c.createBufferSource();
+      const gain = c.createGain();
+      src.buffer = buf;
+      src.connect(gain);
+      gain.connect(c.destination);
+      const vol = 0.08 + Math.random() * 0.08;
+      gain.gain.setValueAtTime(vol, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+      src.start(t);
+    }
+    // Victory fanfare — ascending arpeggio
+    [330, 415, 523, 659, 784].forEach((freq, i) => {
+      const t   = c.currentTime + i * 0.11;
+      const osc = c.createOscillator();
+      const g   = c.createGain();
+      osc.connect(g);
+      g.connect(c.destination);
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.22, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+      osc.start(t);
+      osc.stop(t + 0.35);
+    });
+  },
+
   ko(): void {
     const c = getCtx();
     // Three-note descending crash

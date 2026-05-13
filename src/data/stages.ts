@@ -12,6 +12,7 @@ export interface StageData {
   platformColor: number;
   platforms: PlatformDef[];
   backgroundImage?: string;
+  musicKey: string;
 }
 
 export const STAGES: StageData[] = [
@@ -21,6 +22,7 @@ export const STAGES: StageData[] = [
     backgroundColor: '#1a1a2e',
     platformColor: 0x445566,
     backgroundImage: 'bg-void',
+    musicKey: 'music-battle1',
     platforms: [
       { x: 100, y: 520, w: 1080, h: 24 },
       { x: 160, y: 380, w: 260,  h: 16 },
@@ -34,6 +36,7 @@ export const STAGES: StageData[] = [
     backgroundColor: '#0d1f3c',
     platformColor: 0x5588bb,
     backgroundImage: 'bg-sky',
+    musicKey: 'music-battle2',
     platforms: [
       { x: 200, y: 540, w: 880, h: 20 },
       { x: 80,  y: 400, w: 240, h: 16 },
@@ -48,6 +51,7 @@ export const STAGES: StageData[] = [
     backgroundColor: '#1a0800',
     platformColor: 0x885533,
     backgroundImage: 'bg-ember',
+    musicKey: 'music-battle3',
     platforms: [
       { x: 50,  y: 520, w: 1180, h: 24 },
       { x: 100, y: 240, w: 200,  h: 16 },
@@ -61,6 +65,7 @@ export const STAGES: StageData[] = [
     backgroundColor: '#0d1a0d',
     platformColor: 0x557744,
     backgroundImage: 'bg-ruins',
+    musicKey: 'music-battle4',
     platforms: [
       { x: 80,  y: 520, w: 460, h: 24 },
       { x: 740, y: 520, w: 460, h: 24 },
