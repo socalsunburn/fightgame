@@ -49,6 +49,8 @@ export interface CharacterData {
   /** base key for sprite assets, e.g. 'brawler'. Undefined = use shape rendering. */
   spriteKey?: string;
   spriteAnims?: SpriteAnimDef[];
+  /** if set, special move launches the fighter forward at this speed (px/s) */
+  specialDashSpeed?: number;
   width: number;
   height: number;
   walkSpeed: number;
@@ -88,6 +90,7 @@ export const CHARACTERS: Record<string, CharacterData> = {
     fallSpeed: 600,
     fastFallSpeed: 900,
     weight: 100,
+    specialDashSpeed: 620,
     moves: {
       jab: {
         totalFrames: 20,

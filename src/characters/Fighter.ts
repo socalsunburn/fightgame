@@ -234,6 +234,7 @@ export class Fighter {
 
   receiveHit(hitbox: ActiveHitbox): void {
     if (this.isInvincible) return;
+    if (this.state === FighterState.SHIELD) return;
 
     if (this.state === FighterState.COUNTER) {
       this.pendingCounterHit = hitbox;
@@ -422,6 +423,9 @@ export class Fighter {
       if (this.data.moves.special.isCounter) {
         this.transitionTo(FighterState.COUNTER);
       } else {
+        if (this.data.specialDashSpeed) {
+          this.vx = (this.facingRight ? 1 : -1) * this.data.specialDashSpeed;
+        }
         this.transitionTo(FighterState.SPECIAL);
       }
     }
