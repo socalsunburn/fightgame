@@ -4,6 +4,7 @@ import { Projectile } from '../characters/Projectile';
 import { InputHandler, PlayerInput } from '../input/InputHandler';
 import { CHARACTERS } from '../data/characters';
 import { STAGES } from '../data/stages';
+import { SoundManager } from '../audio/SoundManager';
 
 const FIXED_DT   = 1000 / 60;
 const BLAST_ZONE = { left: -300, right: 1580, top: -400, bottom: 900 };
@@ -111,6 +112,7 @@ export class BattleScene extends Phaser.Scene {
     for (const fighter of this.fighters) {
       for (const p of fighter.drainPendingProjectiles()) {
         this.projectiles.push(new Projectile(this, p));
+        SoundManager.projectile();
       }
     }
 
@@ -149,6 +151,7 @@ export class BattleScene extends Phaser.Scene {
           if (Phaser.Geom.Rectangle.Overlaps(hb.bounds, hurtbox)) {
             defender.receiveHit(hb);
             attacker.registerHit(defender.playerIndex);
+            SoundManager.hit();
             this.cameras.main.shake(80, 0.006);
             break;
           }
@@ -173,6 +176,7 @@ export class BattleScene extends Phaser.Scene {
             sourcePlayer: proj.sourcePlayer,
           });
           proj.active = false;
+          SoundManager.hit();
           this.cameras.main.shake(60, 0.004);
         }
       }
@@ -192,6 +196,7 @@ export class BattleScene extends Phaser.Scene {
         baseKnockback: incoming.baseKnockback * 2,
         sourcePlayer: fighter.playerIndex,
       });
+      SoundManager.heavyHit();
       this.cameras.main.shake(250, 0.016);
     }
   }
@@ -202,6 +207,7 @@ export class BattleScene extends Phaser.Scene {
       const { x, y } = fighter;
       if (x < BLAST_ZONE.left || x > BLAST_ZONE.right || y < BLAST_ZONE.top || y > BLAST_ZONE.bottom) {
         fighter.stocks--;
+        SoundManager.ko();
         this.showKO(fighter.playerIndex);
         if (fighter.stocks <= 0) {
           this.matchOver = true;

@@ -3,6 +3,7 @@ import { FighterState } from './FighterState';
 import { CharacterData, ProjectileDef } from '../data/characters';
 import { PlayerInput } from '../input/InputHandler';
 import { PendingProjectile } from './Projectile';
+import { SoundManager } from '../audio/SoundManager';
 
 const GRAVITY             = 1400;
 const FIXED_DT_SEC        = 1 / 60;
@@ -392,11 +393,13 @@ export class Fighter {
         this.onGround = false;
         this.usedDoubleJump = false;
         this.transitionTo(FighterState.JUMP);
+        SoundManager.jump();
       } else if (!this.usedDoubleJump && isAirborne) {
         this.vy = this.data.doubleJumpForce;
         this.usedDoubleJump = true;
         this.fastFalling = false;
         this.transitionTo(FighterState.DOUBLE_JUMP);
+        SoundManager.doubleJump();
       }
     }
 
@@ -431,6 +434,7 @@ export class Fighter {
     }
 
     if (input.shield && this.onGround) {
+      if (this.state !== FighterState.SHIELD) SoundManager.shield();
       this.transitionTo(FighterState.SHIELD);
     } else if (this.state === FighterState.SHIELD && !input.shield) {
       this.transitionTo(FighterState.IDLE);
@@ -479,6 +483,7 @@ export class Fighter {
           this.state === FighterState.JUMP ||
           this.state === FighterState.DOUBLE_JUMP
         ) {
+          SoundManager.land();
           this.transitionTo(FighterState.IDLE);
         }
       }
