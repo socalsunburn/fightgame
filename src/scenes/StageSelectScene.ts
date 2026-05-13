@@ -40,12 +40,12 @@ export class StageSelectScene extends Phaser.Scene {
       this.cards.push(card);
     }
 
-    this.add.text(width / 2, height - 44, 'ARROW KEYS or A / D  to browse    ENTER or SPACE to confirm', {
-      fontSize: '13px', color: '#444466', fontFamily: 'monospace',
+    this.add.text(width / 2, height - 144, 'ARROW KEYS or A / D  to browse    ENTER or SPACE to confirm', {
+      fontSize: '13px', color: '#ffd700', fontFamily: 'monospace',
     }).setOrigin(0.5);
 
-    this.add.text(width / 2, height - 24, 'ESC — back to menu', {
-      fontSize: '12px', color: '#333355', fontFamily: 'monospace',
+    this.add.text(width / 2, height - 124, 'ESC — back to menu', {
+      fontSize: '12px', color: '#44ccff', fontFamily: 'monospace',
     }).setOrigin(0.5);
 
     this.input.keyboard!.on('keydown', (e: KeyboardEvent) => this.handleKey(e.code));
