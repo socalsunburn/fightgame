@@ -87,7 +87,11 @@ export class CharacterSelectScene extends Phaser.Scene {
       this.lockTexts.push(lockText);
     }
 
-    this.add.text(width / 2, height - 24, 'ESC — back to menu', {
+    this.add.text(width / 2, height - 44, 'P1: WASD + F/G   |   P2: ARROWS + L/K   |   SHIELD: H / J   |   DOWN = fast fall', {
+      fontSize: '11px', color: '#666677', fontFamily: 'monospace',
+    }).setOrigin(0.5);
+
+    this.add.text(width / 2, height - 24, 'ESC — back to stage select', {
       fontSize: '12px', color: '#333355', fontFamily: 'monospace',
     }).setOrigin(0.5);
 

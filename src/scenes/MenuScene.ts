@@ -25,45 +25,17 @@ export class MenuScene extends Phaser.Scene {
       strokeThickness: 4,
     }).setOrigin(0.5).setDepth(2);
 
-    this.add.text(width / 2, height - 44, 'P1: WASD + F/G   |   P2: ARROWS + L/K   |   SHIELD: H / J', {
-      fontSize: '11px',
+    const creditStyle = {
+      fontSize: '13px',
       color: '#ffffff',
       fontFamily: 'monospace',
+      fontStyle: 'bold',
       stroke: '#000000',
       strokeThickness: 3,
-    }).setOrigin(0.5).setDepth(2);
-
-    this.add.text(width / 2, height - 24, 'Gamepads supported   |   DOWN = fast fall', {
-      fontSize: '11px',
-      color: '#ffffff',
-      fontFamily: 'monospace',
-      stroke: '#000000',
-      strokeThickness: 3,
-    }).setOrigin(0.5).setDepth(2);
-
-    this.add.text(width / 2, height - 34, 'Created by Peter Gentile', {
-      fontSize: '10px',
-      color: '#aaaaaa',
-      fontFamily: 'monospace',
-      stroke: '#000000',
-      strokeThickness: 2,
-    }).setOrigin(0.5, 1).setDepth(2);
-
-    this.add.text(width / 2, height - 20, 'Crash-N-Burn Games', {
-      fontSize: '10px',
-      color: '#aaaaaa',
-      fontFamily: 'monospace',
-      stroke: '#000000',
-      strokeThickness: 2,
-    }).setOrigin(0.5, 1).setDepth(2);
-
-    this.add.text(width / 2, height - 6, 'Copyright 2026', {
-      fontSize: '10px',
-      color: '#aaaaaa',
-      fontFamily: 'monospace',
-      stroke: '#000000',
-      strokeThickness: 2,
-    }).setOrigin(0.5, 1).setDepth(2);
+    };
+    this.add.text(width / 2, height - 52, 'Created by Peter Gentile', creditStyle).setOrigin(0.5).setDepth(2);
+    this.add.text(width / 2, height - 34, 'Crash-N-Burn Games',       creditStyle).setOrigin(0.5).setDepth(2);
+    this.add.text(width / 2, height - 16, 'Copyright 2026',           creditStyle).setOrigin(0.5).setDepth(2);
 
     this.tweens.add({
       targets: startText,
