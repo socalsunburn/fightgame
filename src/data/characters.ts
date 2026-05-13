@@ -160,6 +160,14 @@ export const CHARACTERS: Record<string, CharacterData> = {
   swift: {
     name: 'Swift',
     color: 0xff4444,
+    spriteKey: 'swift',
+    spriteAnims: [
+      { name: 'idle',    frames: 8, frameRate: 8,  repeat: -1 },
+      { name: 'run',     frames: 6, frameRate: 14, repeat: -1 },
+      { name: 'attack',  frames: 4, frameRate: 14, repeat:  0 },
+      { name: 'jump',    frames: 7, frameRate: 10, repeat: -1 },
+      { name: 'hitstun', frames: 6, frameRate: 12, repeat:  0 },
+    ],
     width: 36,
     height: 54,
     walkSpeed: 220,
@@ -174,10 +182,10 @@ export const CHARACTERS: Record<string, CharacterData> = {
         totalFrames: 14,
         hitboxes: [
           {
-            x: 30, y: -5, w: 35, h: 25,
+            x: 36, y: 16, w: 42, h: 22,
             activeStart: 3, activeEnd: 6,
             damage: 4,
-            angle: 40,
+            angle: 35,
             baseKnockback: 20,
             knockbackScaling: 0.6,
           },
